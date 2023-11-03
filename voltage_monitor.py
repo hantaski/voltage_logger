@@ -51,7 +51,7 @@ def convert(value):
     OldMin = 208
     OldMax = 65535
     NewMin = 0
-    NewMax = 3.3
+    NewMax = 15
     return (((value - OldMin) * (NewMax - NewMin)) / (OldMax - OldMin)) + NewMin
 
 
