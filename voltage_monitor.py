@@ -20,10 +20,10 @@ from analogio import AnalogIn
 import ssl
 
 def convert(value):
-    OldMin = 208
+    OldMin = 300
     OldMax = 65535
     NewMin = 0
-    NewMax = 15
+    NewMax = 16.4
     return (((value - OldMin) * (NewMax - NewMin)) / (OldMax - OldMin)) + NewMin
 
 def pr(s):
@@ -37,6 +37,8 @@ async def read_voltage():
         # read voltage
         global voltage
         voltage = analog_in.value
+        print("raw="+str(voltage))
+        print("conv="+str(convert(voltage)))
         ctime = rtc.datetime
         td = "{hour:02d}:{minute:02d}\n{day}.{month}.{year}".format(hour=ctime.tm_hour, minute=ctime.tm_min, year=ctime.tm_year, month=ctime.tm_mon, day=ctime.tm_mday)
         text = td+"\n{v:2.2f}".format(v=convert(voltage))+"V´"
@@ -86,11 +88,11 @@ async def wifi_connect():
 
 async def main():
     global pool,http_session
-    asyncio.create_task(wifi_connect())
-    while not wifi.radio.connected:
-        await asyncio.sleep(1)
-    await asyncio.sleep(2)
     if (boo(os.getenv('use_wifi'))):
+        asyncio.create_task(wifi_connect())
+        while not wifi.radio.connected:
+            await asyncio.sleep(1)
+        await asyncio.sleep(2)
         pool = socketpool.SocketPool(wifi.radio)
         ssl_context = ssl.create_default_context()
         http_session = requests.Session(pool, ssl_context)
