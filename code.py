@@ -48,7 +48,7 @@ async def read_voltage():
 async def store_voltage():
     while True:
         ctime = rtc.datetime
-        td = "{year}.{month}.{day} - {hour:02d}:{minute:02d}:{second:02d}".format(hour=ctime.tm_hour, minute=ctime.tm_min, second=ctime.tm_sec, year=ctime.tm_year, month=ctime.tm_mon, day=ctime.tm_mday)
+        td = "{year}.{month}.{day} {hour:02d}:{minute:02d}:{second:02d}".format(hour=ctime.tm_hour, minute=ctime.tm_min, second=ctime.tm_sec, year=ctime.tm_year, month=ctime.tm_mon, day=ctime.tm_mday)
         if (boo(os.getenv('use_sdcard'))):
             print(convert(voltage))
             with open("/sd/voltage_log.txt", "a+") as f:
