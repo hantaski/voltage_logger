@@ -52,7 +52,7 @@ async def store_voltage():
         if (boo(os.getenv('use_sdcard'))):
             print(convert(voltage))
             with open("/sd/voltage_log.txt", "a+") as f:
-                f.write("{ti} - {volt:2.2f}\r\n".format(ti=td, volt=convert(voltage)))
+                f.write("{ti};{volt:2.2f}\r\n".format(ti=td, volt=convert(voltage)))
                 f.flush()
         if boo(os.getenv('use_wifi')) and boo(os.getenv('use_influxdb')) :
             while not wifi.radio.connected:
