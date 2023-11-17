@@ -1,0 +1,29 @@
+
+# kirjoitetaanko sd kortille
+use_sdcard = "true"
+
+# kuinka kauan odotetaan jännitteen näyttämisten välillä, sekunteja
+display_frequency = 5
+
+# kuinka kauan odotetaan jännitteen tallentamisten välillä, sekunteja
+store_frequency = 60
+
+# jos wifi ei ole päällä, vain sd kortti kirjoitus onnistuu
+use_wifi = "false"
+ssid = "vieteri"
+psk = "xxxxxxxx"
+
+# synkataanko ntp:llä aika
+use_ntp = "true"
+timezone = +2
+
+# käytetäänkö influxdb:tä
+use_influxdb = "true"
+influxdb_url = "https://eu-central-1-1.aws.cloud2.influxdata.com/api/v2/write"
+influxdb_org = "-"
+influxdb_bucket = "voltage"
+influxdb_token = "xxxxxxxxxxxxxxxxx"
+# tämä kirjoitetaan influx:iin tagin "location" arvoksi.
+influxdb_tag_location = "office"
+
+
